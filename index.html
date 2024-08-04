@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Website</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="21601-news-logo-icon-vector-icon-vector-eps.png" type="image/x-icon">
 </head>
 <body>
 
@@ -22,8 +23,6 @@
                     <li class="hover-link nav-item" id="technology" onclick="onNavItemClick('technology')">TECHNOLOGY</li>
                     <li class="hover-link nav-item" id="cricket" onclick="onNavItemClick('cricket')">CRICKET</li>
                     <li class="hover-link nav-item" id="food" onclick="onNavItemClick('food')">FOOD</li>
-
-
                 </ul>
             </div>
             <div class="search-bar flex">
@@ -33,11 +32,8 @@
         </div>
     </nav>
     
-
     <main>
-        <div class="cards-container container flex" id="cards-container">
-            
-        </div>
+        <div class="cards-container container flex" id="cards-container"></div>
     </main>
 
     <template id="template-news-card">
@@ -49,10 +45,21 @@
                 <h3 id="news-title">This is the Title</h3>
                 <h6 class="news-source" id="news-source">End Gadget 26/08/2023</h6>
                 <p class="news-desc" id="news-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae saepe quis voluptatum quisquam vitae doloremque facilis molestias quae ratione cumque!</p>
+                <div class="card-buttons">
+                    <button class="see-more-button">See More</button>
+                    <button class="save-cutting-button">Save to Cuttings</button>
+                </div>
             </div>
         </div>
     </template>
 
+    <section>
+        <h2 id="cuttings-section">Your Cuttings</h2>
+        <div class="cuttings-container" id="cuttings-container"></div>
+    </section>
+
+    <button id="scroll-to-top" class="scroll-to-top-button" onclick="scrollToTop()">↑</button>
+
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
