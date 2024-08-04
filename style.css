@@ -152,3 +152,94 @@ main {
 .news-source {
     margin-block: 12px;
 }
+
+/* Add these styles to your existing style.css */
+
+.save-cutting-button {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    margin-top: 12px;
+}
+
+.save-cutting-button:hover {
+    background-color: var(--accent-color-dark);
+}
+
+.cuttings-container {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.delete-cutting-button {
+    background-color: red;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    margin-top: 12px;
+}
+
+.delete-cutting-button:hover {
+    background-color: darkred;
+}
+
+/* Add these styles to your existing style.css */
+
+.card-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.save-cutting-button {
+    background-color: darkred;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+}
+
+.see-more-button{
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    margin-top: 11.5px;
+    width: 120px;
+}
+
+.see-more-button:hover, .save-cutting-button:hover {
+    background-color: var(--accent-color-dark);
+}
+
+.scroll-to-top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    display: none; /* Initially hidden */
+}
+
+.scroll-to-top-button:hover {
+    background-color: var(--accent-color-dark);
+}
