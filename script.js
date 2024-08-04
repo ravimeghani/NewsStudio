@@ -1,10 +1,13 @@
 const API_KEY = "68587491572849668424f32d95c1a227";
 const url = "https://newsapi.org/v2/everything?q=";
 
-window.addEventListener("load", () => fetchNews("India"));
+window.addEventListener("load", () => {
+    fetchNews("India");
+});
+
 
 function reload() {
-    window.location.reload();
+   window.location.reload();
 }
 
 async function fetchNews(query) {
@@ -32,6 +35,8 @@ function fillDataInCard(cardClone, article) {
     const newsTitle = cardClone.querySelector("#news-title");
     const newsSource = cardClone.querySelector("#news-source");
     const newsDesc = cardClone.querySelector("#news-desc");
+    const saveCuttingButton = cardClone.querySelector(".save-cutting-button");
+    const seeMoreButton = cardClone.querySelector(".see-more-button");
 
     newsImg.src = article.urlToImage;
     newsTitle.innerHTML = article.title;
@@ -46,7 +51,18 @@ function fillDataInCard(cardClone, article) {
     cardClone.firstElementChild.addEventListener("click", () => {
         window.open(article.url, "_blank");
     });
+
+    saveCuttingButton.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent click event from bubbling up
+        saveToCuttings(article);
+    });
+
+    seeMoreButton.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent click event from bubbling up
+        window.open(article.url, "_blank");
+    });
 }
+
 
 let curSelectedNav = null;
 function onNavItemClick(id) {
@@ -66,4 +82,70 @@ searchButton.addEventListener("click", () => {
     fetchNews(query);
     curSelectedNav?.classList.remove("active");
     curSelectedNav = null;
+});
+
+function saveToCuttings(article) {
+    let cuttings = JSON.parse(localStorage.getItem("cuttings")) || [];
+    cuttings.push(article);
+    localStorage.setItem("cuttings", JSON.stringify(cuttings));
+    alert("Cutting added!");
+    loadCuttings();
+    scrollToCuttings();
+}
+
+function loadCuttings() {
+    const cuttingsContainer = document.getElementById("cuttings-container");
+    cuttingsContainer.innerHTML = "";
+    let cuttings = JSON.parse(localStorage.getItem("cuttings")) || [];
+
+    cuttings.forEach((article, index) => {
+        const cardClone = document.createElement("div");
+        cardClone.className = "card";
+        cardClone.innerHTML = `
+            <div class="card-header">
+                <img src="${article.urlToImage}" alt="news-image">
+            </div>
+            <div class="card-content">
+                <h3>${article.title}</h3>
+                <h6 class="news-source">${article.source.name} · ${new Date(article.publishedAt).toLocaleString("en-US", { timeZone: "Asia/Jakarta" })}</h6>
+                <p class="news-desc">${article.description}</p>
+                <button class="delete-cutting-button" onclick="deleteCutting(${index})">Delete</button>
+            </div>
+        `;
+        cuttingsContainer.appendChild(cardClone);
+    });
+}
+
+function deleteCutting(index) {
+    let cuttings = JSON.parse(localStorage.getItem("cuttings")) || [];
+    cuttings.splice(index, 1);
+    localStorage.setItem("cuttings", JSON.stringify(cuttings));
+    loadCuttings();
+}
+
+function scrollToCuttings() {
+    document.querySelector("section").scrollIntoView({ behavior: "smooth" });
+}
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+const scrollToTopButton = document.getElementById("scroll-to-top");
+
+window.addEventListener("scroll", () => {
+    // Show the scroll-to-top button whenever the user scrolls down
+    if (window.pageYOffset > 100) {
+        scrollToTopButton.style.display = "block";
+    } else {
+        scrollToTopButton.style.display = "none";
+    }
+});
+
+// Event listener for the scroll-to-top button
+scrollToTopButton.addEventListener("click", () => {
+    scrollToTop();
 });
